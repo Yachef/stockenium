@@ -166,6 +166,9 @@ button{
   }
 
   #news {
+    height: 80vh;
+    overflow-y: overlay;
+    padding-right: 20px;
     a{
       text-decoration: none;
     }
@@ -191,6 +194,16 @@ button{
     }
     .article-container:last-child hr{
       border:none !important;
+    }
+  }
+
+  #forex{
+    #lastStockValue{
+      text-align: center;
+      font-size: 40px;
+      text-decoration: blink;
+      animation: blinker 1s linear infinite;
+      color:red
     }
   }
   

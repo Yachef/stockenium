@@ -21,6 +21,12 @@ class Actions extends Component{
             waitingForDatas:3
         })
         this.suggestions = require("../../../nyse-stockmarket.json")
+        this.CancelToken = axios.CancelToken;
+        this.source = this.CancelToken.source();
+    }
+
+    componentWillUnmount(){
+        this.source.cancel();
     }
     setSearchQuery = (query) => {
         this.setState({
@@ -32,7 +38,7 @@ class Actions extends Component{
             searchQuery:symbol,
             waitingForDatas:0,
         })
-        axios.get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=PVV4C25QHRGYZBN2`)
+        axios.get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=PVV4C25QHRGYZBN2`,{cancelToken:this.source.token})
             .then(res => {
                 if(res.status === 200 && res.data["Name"]){
                     this.setState({
@@ -68,12 +74,8 @@ class Actions extends Component{
             })
     }
 
-    componentDidUpdate(){
-        console.log(this.state.waitingForDatas);
-    }
-
     getWeeklyDatas = (symbol) => {
-        axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=PVV4C25QHRGYZBN2`)
+        axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=PVV4C25QHRGYZBN2`,{cancelToken:this.source.token})
             .then(res =>{
                 if(res.status ===200){
                     if(res.data["Time Series (Daily)"]){
@@ -88,12 +90,11 @@ class Actions extends Component{
                 }
                 this.setState((prevState) =>  {return {waitingForDatas:prevState.waitingForDatas+1}})
             }).catch(e=>{
-                if(alert("Erreur : " + e)){}
-                else document.location.reload()
+                console.log(e)
             })
     }
     getLastStockValue = (symbol) => {
-        axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=PVV4C25QHRGYZBN2`)
+        axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=PVV4C25QHRGYZBN2`,{cancelToken:this.source.token})
             .then(res =>{
                 if(res.status ===200){
                     if(res.data["Time Series (1min)"]){
@@ -108,8 +109,7 @@ class Actions extends Component{
                 }
                 this.setState((prevState) =>  {return {waitingForDatas:prevState.waitingForDatas+1}})
             }).catch(e=>{
-                if(alert("Erreur : " + e)){}
-                else document.location.reload()
+                console.log(e)
             })
     }
 

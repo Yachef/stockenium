@@ -9,18 +9,24 @@ class News extends Component {
         this.state = {
             articles:null
         }
+        this.CancelToken = axios.CancelToken;
+        this.source = this.CancelToken.source();
     }
-
 
     componentDidMount(){
         this.getNews();
     }
+
+    
+    componentWillUnmount(){
+        this.source.cancel();
+    }
+
     getNews = () => {
-        axios.get("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Frss.nytimes.com%2Fservices%2Fxml%2Frss%2Fnyt%2FEconomy.xml")
+        axios.get("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Frss.nytimes.com%2Fservices%2Fxml%2Frss%2Fnyt%2FEconomy.xml",{cancelToken:this.source.token})
         .then(res => {
             if(res.status === 200){
                 const articles = res.data.items
-                console.log(articles)
                 const formattedArticles = articles.map((article) =>{
                     return(
                         <div key = {article.pubDate} className = "article-container">

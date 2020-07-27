@@ -10,7 +10,7 @@ class Accueil extends Component{
                 <Title name = "Accueil"/>
                 <section style={{width:"100%"}} className = "d-flex justify-content-center">
                     <div className="row" style = {{width:"100%"}}>
-                        <div className="col-lg-8">
+                        <div className="col-lg-7">
                             <div className = "box">
                                 <h2 style={{textAlign:"center"}}>Bienvenue sur <span style = {{fontWeight:'bold'}}>STOCK</span>enium !</h2>
                                 <p>Cette application vous permet de :</p>
@@ -22,7 +22,7 @@ class Accueil extends Component{
                             </div>
                         </div>
 
-                        <div className="col-lg-4">
+                        <div className="col-lg-5">
                             <News />
                         </div>
                         
