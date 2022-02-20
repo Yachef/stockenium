@@ -1,0 +1,223 @@
+$heightTopbar:60px;
+$lightGreen:#17A9A8;
+$darkGreen:#21B5B5;
+$sidebarWidth:200px;
+$border-box:1px solid lightgray;
+$font:"Nunito", sans-serif;
+*{
+  font-family: $font;
+}
+button{
+  background:transparent;
+  border: none;
+  :hover{
+    cursor: pointer;
+  }
+}
+
+/* APP */
+#App{
+  background-color:#EEEEEE ;
+}
+
+.pushed {
+  transition: margin-left .5s;
+  margin-left:$sidebarWidth;
+}
+
+.logo{
+  width: 100%;
+  height: $heightTopbar;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $darkGreen;
+  a, img{
+    height: 100%;
+  }
+}
+
+.box{
+  background-color: white;
+  border : $border-box;
+  padding: 10px;
+  white-space: normal;
+  margin-bottom:20px;
+  border-radius: 10px;
+}
+
+/* MENU */
+#menu{
+  #topbar{
+    height: $heightTopbar;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+    transition:0.5s;
+    background-color:$lightGreen;
+    color:white;
+    font-size: 17px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+  #topbar.pushed{
+    width: -webkit-calc(100% - 240px);
+    width:    -moz-calc(100% - 240px);
+    width:         calc(100% - 240px);
+  }
+  #sidebar.hide-nav{
+    width: 0 !important;
+  }
+  #sidebar.show-nav{
+    width: $sidebarWidth !important;
+  }
+  #sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #333244; 
+    overflow-x: hidden; 
+    transition: 0.5s; 
+    white-space: nowrap;
+
+    .menu-items a {
+      display: flex;
+      padding: 20px 10px;
+      text-decoration: none;
+      font-size: 20px;
+      color: grey;
+      transition: 0.3s;
+
+      .menu-item-text{
+        width: 150px;
+        pointer-events:none
+      }
+      .menu-item-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        margin-right: 10px;
+        pointer-events:none
+      }
+      
+    }
+    .menu-items a:hover, .menu-items a.active{
+      color: #f1f1f1;
+      background-color: #2B2A3C;
+    }
+  }
+  @media screen and (max-height: 450px) {
+    #sidebar a {font-size: 18px;}
+ }
+}
+
+#content{
+  transition:0.5s;
+  padding-bottom: 50px;
+  white-space: nowrap;
+  padding-top: $heightTopbar;
+
+  #login{
+    button{
+      background-color: $lightGreen;
+      border-color:$darkGreen;
+  
+      :focus{
+        box-shadow: 0 0 0 0.2rem $darkGreen;
+        
+      }
+    }
+    .error-container{
+      margin-bottom: 10px;
+      color:red;
+    }
+  }
+
+  #actions{
+    #actions-data{
+      width: 95%;
+      margin: auto;
+      max-width: 100%;
+      >div{
+        padding: 0px;
+      }
+      >div:nth-child(1){
+        padding:0px 10px 0px 0px;
+      }
+    }
+    #lastStockValue{
+      text-align: center;
+      font-size: 40px;
+      text-decoration: blink;
+      animation: blinker 1s linear infinite;
+      color:red
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+  }
+
+  #news {
+    height: 80vh;
+    overflow-y: overlay;
+    padding-right: 20px;
+    a{
+      text-decoration: none;
+    }
+    .article-image{
+      padding-right: 10px;
+      img{
+        height: 100px;
+        width: 100px;
+        border-radius: 5px;
+      }
+    }
+    .article-title{
+      color: black;
+      font-size: 15px;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: left !important;
+    }
+
+    .article-date{
+      color:lightgray;
+      font-size: 12px;
+    }
+    .article-container:last-child hr{
+      border:none !important;
+    }
+  }
+
+  #forex{
+    #lastStockValue{
+      text-align: center;
+      font-size: 40px;
+      text-decoration: blink;
+      animation: blinker 1s linear infinite;
+      color:red
+    }
+  }
+  
+}
+
+
+
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+
